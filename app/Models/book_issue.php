@@ -33,9 +33,9 @@ class book_issue extends Model
 
 
     protected $casts = [
-        'issue_date' => 'datetime:Y-m-d',
-        'return_date' => 'datetime:Y-m-d',
-        'return_day' => 'datetime:Y-m-d',
+        'issue_date' => 'datetime:Y-m-d H:i:s',
+        'return_date' => 'datetime:Y-m-d H:i:s',
+        'return_day' => 'datetime:Y-m-d H:i:s',
     ];
 
 }
