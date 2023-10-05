@@ -55,7 +55,8 @@ ul{
 .menu li{
     display: inline-block;
 }
-.menu li a{
+
+.menu li a {
     color: #fff;
     font-size: 16px;
     font-weight: 600;
@@ -64,10 +65,13 @@ ul{
     display: block;
     transition: all 0.3s;
 }
-.menu li a:hover{
+
+.menu li a:hover, 
+.menu li.active a {
     background: #fff;
     color: #A00000;
 }
+
 /* Footer Styling */
 #footer{
     background: #A00000;
