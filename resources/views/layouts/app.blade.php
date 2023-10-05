@@ -44,16 +44,16 @@
       <div class="row">
         <div class="col-md-12">
           <ul class="menu">
-            <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
-            <li><a href="{{ route('authors') }}">Autores</a></li>
-            <li><a href="{{ route('publishers') }}">Editoriales</a></li>
-            <li><a href="{{ route('categories') }}">Categorias</a></li>
-            <li><a href="{{ route('books') }}">Libros</a></li>
-            <li><a href="{{ route('students') }}">Reg Estudiantes</a></li>
-            <li><a href="{{ route('book_issued') }}">Libros Prestados</a></li>
-            <li><a href="{{ route('reports') }}">Reportes</a></li>
-            <li><a href="{{ route('settings') }}">Configuraciones</a></li>
-          </ul>
+                <li class="{{ Request::is('dashboard') ? 'active' : '' }}"><a href="{{ route('dashboard') }}">Inicio</a></li>
+                <li class="{{ Request::is('authors') ? 'active' : '' }}"><a href="{{ route('authors') }}">Autores</a></li>
+                <li class="{{ Request::is('publishers') ? 'active' : '' }}"><a href="{{ route('publishers') }}">Editoriales</a></li>
+                <li class="{{ Request::is('categories') ? 'active' : '' }}"><a href="{{ route('categories') }}">Categorias</a></li>
+                <li class="{{ Request::is('books') ? 'active' : '' }}"><a href="{{ route('books') }}">Libros</a></li>
+                <li class="{{ Request::is('students') ? 'active' : '' }}"><a href="{{ route('students') }}">Lectores</a></li>
+                <li class="{{ Request::is('book_issued') ? 'active' : '' }}"><a href="{{ route('book_issued') }}">Prestar Libro</a></li>
+                <li class="{{ Request::is('reports') ? 'active' : '' }}"><a href="{{ route('reports') }}">Reportes</a></li>
+                <li class="{{ Request::is('settings') ? 'active' : '' }}"><a href="{{ route('settings') }}">Ajustes</a></li>
+            </ul>
         </div>
       </div>
     </div>
