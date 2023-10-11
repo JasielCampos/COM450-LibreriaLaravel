@@ -15,7 +15,14 @@
             <input type="month" name="month" class="form-control" value="{{ date('Y-m') }}">
           </div>
           <input type="submit" class="btn btn-danger" name="search_month" value="Buscar">
+
         </form>
+        <form id="pdfForm2" class="yourform mb-5" action="{{ route('pdf_month') }}" method="get">
+          <input type="hidden" name="month" value="{{ request('month') }}">
+          <button type="submit" class="btn btn-danger" name="search_month">Generar PDF</button>
+        </form>
+
+
       </div>
     </div>
     @if ($books)

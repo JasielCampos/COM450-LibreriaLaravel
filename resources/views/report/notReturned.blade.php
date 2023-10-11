@@ -8,6 +8,7 @@
       </div>
     </div>
     @if ($books)
+    <a href="{{ route('pdf_not') }}" target="_red" class="btn btn-danger">Generar PDF</a> 
     <div class="row">
       <div class="col-md-12">
         <table class="content-table">
@@ -33,7 +34,7 @@
               <td>{{ $book->return_date->format('d M, Y') }}</td>
               <td>@php $date1 = date_create(date('Y-m-d'));
                 $date2 = date_create($book->return_date->format('d-m-Y'));
-                if($date1 > $date2){
+                if($date1 < $date2){
                 $diff = date_diff($date1,$date2);
                 echo $days = $diff->format('%a days');
                 }else{

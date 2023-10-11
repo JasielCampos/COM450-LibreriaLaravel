@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\book;
 use App\Models\book_issue;
 use Illuminate\Http\Request;
-
 class ReportsController extends Controller
 {
     public function index()
@@ -17,12 +16,12 @@ class ReportsController extends Controller
     {
         return view('report.dateWise', ['books' => '']);
     }
-
+   
     public function generate_date_wise_report(Request $request)
     {
         $request->validate(['date' => "required|date"]);
         return view('report.dateWise', [
-            'books' => book_issue::where('issue_date', $request->date)->latest()->get()
+            'books' => book_issue::where('issue_date','LIKE', '%'. $request->date)->latest()->get()
         ]);
     }
 
@@ -41,8 +40,9 @@ class ReportsController extends Controller
 
     public function not_returned()
     {
+
         return view('report.notReturned',[
-            'books' => book_issue::latest()->get()
+            'books' => book_issue::where('issue_status', 'LIKE', '%'. 'N' .'%')->latest()->get(),
         ]);
     }
 }
