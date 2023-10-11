@@ -16,6 +16,7 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
+        "chart.js": "^4.4.0",
         "turbolinks": "^5.2.0"
     }
 }

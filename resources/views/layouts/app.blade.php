@@ -60,6 +60,7 @@
   </div> <!-- /Menu Bar -->
 
   @yield('content')
+  @yield('scripts')
 
   <!-- FOOTER -->
   <div id="footer">

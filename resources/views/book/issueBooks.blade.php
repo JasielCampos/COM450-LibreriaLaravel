@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')
+<link rel="stylesheet" href="{{ asset('css/style.css') }} "> <!-- Custom stlylesheet -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div id="admin-content">
   <div class="container">
     <div class="row">
@@ -22,12 +24,12 @@
             <th>Fecha de Prestamo</th>
             <th>Fecha de Devolucion</th>
             <th>Estado</th>
-            <th>Editar</th>
+            <th>Regresar</th>
             <th>Eliminar</th>
           </thead>
           <tbody>
             @forelse ($books as $book)
-            <tr style='@if (date(' Y-m-d')> $book->return_date->format('d-m-Y') && $book->issue_status == 'N') ) background:rgba(255,0,0,0.2) @endif' >
+            <tr style='@if (date('Y-m-d') > $book->return_date->format('d-m-Y') && $book->issue_status == 'N') ) background:rgba(255,0,0,0.2) @endif' >
               <td>{{ $book->id }}</td>
               <td>{{ $book->student->name }}</td>
               <td>{{ $book->book->name }}</td>
@@ -38,13 +40,13 @@
 
               <td>
                 @if ($book->issue_status == 'Y')
-                <span class='badge badge-success'>Disponible</span>
+                <span class='badge badge-success'>Devuelto</span>
                 @else
                 <span class='badge badge-danger'>Prestado</span>
                 @endif
               </td>
               <td class="edit">
-                <a href="{{ route('book_issue.edit', $book->id) }}" class="btn btn-success">Editar</a>
+                <a href="{{ route('book_issue.edit', $book->id) }}" class="btn btn-success">Regresar</a>
               </td>
               <td class="delete">
                 <form action="{{ route('book_issue.destroy', $book) }}" method="post" class="form-hidden">
@@ -60,9 +62,72 @@
             @endforelse
           </tbody>
         </table>
+
         {{ $books->links('vendor/pagination/bootstrap-4') }}
       </div>
     </div>
   </div>
+
+    <div class="row mt-5">
+      <div class="col-md-6 offset-md-3">
+        <button class="btn btn-primary" onclick="generateCharts()">Generar Gráfica</button>
+      </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+        <h3>Estado de libros</h3>
+        <div id="chart-container">
+            <canvas id="booksChart" width="400" height="400"></canvas>
+        </div>
+    </div>
+  </div>
+
 </div>
+@endsection
+
+
+
+@section('scripts')
+<script>
+function generateCharts(){
+    var ctx = document.getElementById('booksChart').getContext('2d');
+    
+    // Assuming that PHP is rendering this JavaScript, directly embed the PHP output into the JavaScript
+    const data = <?php echo json_encode($books); ?>;
+    
+    const dataArray = data.data; // extracting array from object
+
+    var prestado = dataArray.filter(book => book.issue_status === 'N').length;
+    var devuelto = dataArray.filter(book => book.issue_status === 'Y').length;
+
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Prestado', 'Devuelto'],
+            datasets: [{
+                label: 'Estado de libros',
+                data: [prestado, devuelto],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(0, 255, 0, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(0, 255, 0, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+          //make the chart smaller
+          responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: false
+                }
+            }
+        }
+    });
+}
+</script>
 @endsection

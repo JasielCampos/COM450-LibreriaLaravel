@@ -112,4 +112,15 @@ class BookIssueController extends Controller
         book_issue::find($id)->delete();
         return redirect()->route('book_issued');
     }
+
+    // function to save the data of the book issued
+    public function charts(){
+        $prestado = book_issue::where('issue_status', 'N')->count();
+        $devuelto = book_issue::where('issue_status', 'Y')->count();
+        $data = [$prestado, $devuelto];
+        $data = json_encode($data);
+        return view('book.issueBooks', [
+            'data' => $data,
+        ]);
+    }
 }
