@@ -10,6 +10,7 @@
       </div>
       <div class="offset-md-6 col-md-3">
         <a class="add-new" href="{{ route('book_issue.create') }}">Agregar Libro Prestado</a>
+
       </div>
     </div>
     <div class="row">
@@ -36,7 +37,14 @@
               <td>{{ $book->student->phone }}</td>
               <td>{{ $book->student->email }}</td>
               <td>{{ date('d M, Y H:i', strtotime($book->issue_date)) }}</td>
-              <td>{{ date('d M, Y H:i', strtotime($book->return_date)) }}</td>
+              <td>
+                @if ($book->return_date)
+                {{ date('d M, Y H:i', strtotime($book->return_date->format('d-m-Y'))) }}
+                @else
+                N/A
+                @endif
+              </td>
+
 
               <td>
                 @if ($book->issue_status == 'Y')

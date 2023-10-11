@@ -20,10 +20,12 @@
             @enderror
           </div>
           <input type="submit" class="btn btn-danger" name="search_date" value="Buscar">
+          <a href="{{ route('pdf_date') }}" target="_red" class="btn btn-danger">Generar PDF</a> 
         </form>
       </div>
     </div>
     @if ($books)
+   
     <div class="row">
       <div class="col-md-12">
         <table class="content-table">
