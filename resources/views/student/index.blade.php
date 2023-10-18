@@ -17,7 +17,7 @@
                 <th>Celular</th>
                 <th>Email</th>
                 <th>Carnet de Lector</th>
-                <th>Ver</th>
+                
                 <th>Editar</th>
                 <th>Eliminar</th>
                 </thead>
@@ -35,9 +35,9 @@
                         </td>
 
 
-                        <td class="view">
+                        <!-- <td class="view">
                             <button data-sid='{{ $student->id }}>' class=" btn btn-primary view-btn">Ver</button>
-                        </td>
+                        </td> -->
                         <td class="edit">
                         <a href="{{ route('student.edit', $student) }}>" class="btn btn-success">Editar</a>
                         </td>
