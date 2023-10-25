@@ -21,7 +21,8 @@ class studentFactory extends Factory
             'email' => $this->faker->safeEmail,
             'phone' => $this->faker->phoneNumber,
             'address' => $this->faker->address,
-            'class' => $this->faker->sentence(3)
+            'class' => $this->faker->sentence(3),
+            'expire_at' => now()->addMonths(6)
         ];
     }
 }

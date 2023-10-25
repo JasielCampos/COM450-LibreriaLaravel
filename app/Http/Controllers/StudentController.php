@@ -104,15 +104,13 @@ class StudentController extends Controller
         return redirect()->route('students');
     }
 
-    public function carnetVencimiento()
-    {
-        //$return_date = date('Y-m-d H:i:s', strtotime("+" . (settings::latest()->first()->return_days) . " days"));
-        $expires_at = date('Y-m-d H:i:s', strtotime("+6 months"));
-        $students = student::where('expires_at', '<', $expires_at)->get();
-        return view('student.carnetVencimiento', [
-            'students' => $students
-        ]);
-    }
+    // public function carnetVencimiento()
+    // {
+    //     //$return_date = date('Y-m-d H:i:s', strtotime("+" . (settings::latest()->first()->return_days) . " days"));
+    //     $expires_at = date('Y-m-d H:i:s', strtotime("+6 months"));
+    //     $students = student::where('expires_at', '<', $expires_at)->get();
+    //     return 
+    // }
 
 
     // Generar CarnetPdf
@@ -159,18 +157,21 @@ class StudentController extends Controller
     public function store(StorestudentRequest $request)
     {
         $data = $request->validated();
-
-        // Handle photo upload
+    
+        // Agregar la fecha de vencimiento (expire_at) a 6 meses desde la fecha actual
+        $data['expireat'] = now()->addMonths(6);
+    
+        // Handle photo upload (si es necesario)
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $fileName = time() . '_' . $file->getClientOriginalName();
+            $fileName = time() . '' . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $fileName);
-            $data['photo'] = $fileName; // This should save the filename to the database
+            $data['photo'] = $fileName;
         }
-
-        // The create method should save the student with the photo filename
+    
+        // Guardar el estudiante con la fecha de vencimiento
         Student::create($data);
-
+    
         return redirect()->route('students');
     }
 
@@ -180,10 +181,13 @@ class StudentController extends Controller
         $data = $request->validated();
         $student = Student::find($id);
 
-        // Handle photo upload
+        // Agregar la fecha de vencimiento (expire_at) a 6 meses desde la fecha actual
+        $data['expireat'] = now()->addMonths(6);
+
+        // Handle photo upload (si es necesario)
         if ($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $fileName = time() . '_' . $file->getClientOriginalName();
+            $fileName = time() . '' . $file->getClientOriginalName();
             $file->move(public_path('uploads'), $fileName);
             $data['photo'] = $fileName;
         }

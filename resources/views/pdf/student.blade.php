@@ -22,7 +22,7 @@
             background-color: white;
             width: 46%;
             margin-left: 4%;
-            height: 210px;
+            height: 225px;
             border: 6px solid #DC143C;
             border-radius: 3%;
         }
@@ -99,7 +99,7 @@
                     <p class="card-text"><span class="font-weight-bold">Género: </span>{{ $student->gender }}</p>
                     <p class="card-text"><span class="font-weight-bold">Celular: </span>{{ $student->phone }}</p>
                     <p class="card-text"><span class="font-weight-bold">Email: </span>{{ $student->email }}</p>
-                    <p class="card-text"><span class="font-weight-bold">Clase: </span>{{ $student->expires_at }}</p>
+                    <p class="card-text"><span class="font-weight-bold">Válido hasta: </span>{{$student->expire_at }}</p>
                 </div>
 
                 <div class="foto-lector">
