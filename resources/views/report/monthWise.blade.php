@@ -17,28 +17,25 @@
           <input type="submit" class="btn btn-danger" name="search_month" value="Buscar">
 
         </form>
-     
+        <form id="pdfForm2" class="yourform mb-5" action="{{ route('pdf_month') }}" method="get">
+          <input type="hidden" name="month" value="{{ request('month') }}">
+          <button type="submit" class="btn btn-danger" name="search_month">Generar PDF</button>
+        </form>
 
 
       </div>
     </div>
     @if ($books)
-   
-    <div class="text-right">
-    <a href="{{  route('pdf_month', ['month' => request('month')]) }}" target="_red" class="btn btn-danger px-3 py-2">Generar PDF</a> 
-    </div>
-  
-    
-    <div class="row p-3">
+    <div class="row">
       <div class="col-md-12">
         <table class="content-table">
           <thead>
-            <th>Nro.</th>
-            <th>Lector</th>
-            <th>Título del Libro</th>
-            <th>Celular</th>
+            <th>S.No</th>
+            <th>Student Name</th>
+            <th>Book Name</th>
+            <th>Phone</th>
             <th>Email</th>
-            <th>Fecha de Préstamo</th>
+            <th>Issue Date</th>
           </thead>
           <tbody>
             @forelse ($books as $book)

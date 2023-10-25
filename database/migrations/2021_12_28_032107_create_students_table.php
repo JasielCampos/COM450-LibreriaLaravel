@@ -22,6 +22,7 @@ class CreateStudentsTable extends Migration
             $table->string('phone');
             $table->string('address');
             $table->string('class');
+            $table->string('photo')->nullable(); // New field for photo, allowing null for now
             $table->timestamps();
         });
     }

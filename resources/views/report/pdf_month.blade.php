@@ -23,7 +23,7 @@
 
 
       <div class="container" style="size">
-        <h5 style="text-align: center"><strong>Reporte de libros mensual</strong></h5>
+        <h5 style="text-align: center"><strong>Reporte de libros no devueltos</strong></h5>
         <table class="table table-striped text-center">
           <thead>
             <th scope="col">S.No</th>

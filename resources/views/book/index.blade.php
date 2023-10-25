@@ -16,7 +16,7 @@
         <div class="message"></div>
         <table class="content-table">
           <thead>
-            <th>Nro.</th>
+            <th>S.No</th>
             <th>Titulo</th>
             <th>Categoría</th>
             <th>Autor</th>
