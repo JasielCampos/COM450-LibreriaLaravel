@@ -175,7 +175,26 @@ class StudentController extends Controller
         return redirect()->route('students');
     }
 
+    public function printAllCards()
+    {
+        $students = Student::all();
 
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+
+        $dompdf = new Dompdf($options);
+
+        $html = view('pdf.students', compact('students'));
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+
+        $dompdf->render();
+
+        // Stream the PDF to the browser with option 'Attachment' set to false
+        return $dompdf->stream("carnets_estudiantes.pdf", ['Attachment' => false]);
+    }
     public function update(UpdatestudentRequest $request, $id)
     {
         $data = $request->validated();

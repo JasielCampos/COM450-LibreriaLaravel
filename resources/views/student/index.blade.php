@@ -2,10 +2,15 @@
 @section('content')
 <div id="admin-content">
     <div class="container"> <div class="row"> <div class="col-md-4"> <h2 class="admin-heading">Lista de Estudiantes</h2>
-        </div> <div class="offset-md-6 col-md-2"> <a class="add-new" href="{{ route('student.create') }}">Agregar
-        Estudiante</a>
-        </div>
-        </div>
+        </div> 
+    <div class="offset-md-6 col-md-2">
+    <a class="add-new" href="{{ route('student.create') }}">Agregar Estudiante</a>
+    
+    </div>
+    </div>
+
+
+
         <div class="row">
             <div class="col-md-12">
             <div class="message"></div>
@@ -55,7 +60,14 @@
                         @endforelse
                 </tbody>
             </table>
+
+            <div class="col-3 p-4">
+            <a class="add-new" href="{{ route('students.print') }}" target="_blank">Imprimir Carnets</a>
+            </div>
+
             {{ $students->links('vendor/pagination/bootstrap-4') }}
+
+            
             <div id="modal">
                 <div id="modal-form">
                     <table cellpadding="10px" width="100%">

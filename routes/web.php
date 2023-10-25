@@ -85,6 +85,8 @@ Route::middleware('auth')->group(function () {
     // Ruta CarnetPdf
     Route::get('/carnet-pdf', [PDFController::class, 'carnet_pdf'])->name('carnet_pdf');
     Route::get('student/pdf/{id}', [StudentController::class, 'generatePDF'])->name('student.pdf');
+    Route::get('/students/print', [StudentController::class, 'printAllCards'])->name('students.print');
+
 
 
 
