@@ -13,7 +13,7 @@ class studentFactory extends Factory
      */
     public function definition()
     {
-        $gender=['male','female'];
+        $gender=['Hombre','Mujer'];
         return [
             'name' => $this->faker->name,
             'age' => random_int(18,80),

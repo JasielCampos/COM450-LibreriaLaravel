@@ -17,7 +17,7 @@
                 <th>Celular</th>
                 <th>Email</th>
                 <th>Carnet de Lector</th>
-                
+                <!-- <th>Ver</th> -->
                 <th>Editar</th>
                 <th>Eliminar</th>
                 </thead>
@@ -69,33 +69,48 @@
 </div>
 </div>
 <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>
+
 <script type="text/javascript">
-    //Show shudent detai          $(".view-btn").on("click", fu nc ti               
-    var student_id = $(thi        ata                  
-                ajax({
-        url: "http://127.0.0.            /student/sh                   student_id,
-                             pe: "get",
-        s: function (student)                           console.log(student);
-        form = "<tr><td>Student Name :</td><td><b>" + student['name'] + "</b></td></tr><tr><td>Address :</td><td><b>" + student['address'] + "</b></td></tr><tr><td>Gender :</td><td><b>" + student['gender'] + "</b></td></tr><tr><td>Class :</td><td><b>" + student['class'] + "</b></td></tr><tr><td>Age :</td><td><b>" + student['age'] + "</b></td></tr><tr><td>Phone :</td><td><b>" + student[+ "</b></td></tr><t                ail :</td>                 + studen                ']                 /            r>                           console                  m);
+    $(document).ready(function () {
+        $(".view-btn").on("click", function () {
+            var student_id = $(this).data("sid");
+            $.ajax({
+                url: "http://127.0.0.1:8000/student/show/" + student_id,
+                type: "get",
+                success: function (student) {
+                    console.log(student);
+                    var form =
+                        "<tr><td>Student Name :</td><td><b>" + student['name'] + "</b></td></tr>" +
+                        "<tr><td>Address :</td><td><b>" + student['address'] + "</b></td></tr>" +
+                        "<tr><td>Gender :</td><td><b>" + student['gender'] + "</b></td></tr>" +
+                        "<tr><td>Class :</td><td><b>" + student['class'] + "</b></td></tr>" +
+                        "<tr><td>Age :</td><td><b>" + student['age'] + "</b></td></tr>" +
+                        "<tr><td>Phone :</td><td><b>" + student['phone'] + "</b></td></tr>" +
+                        "<tr><td>Email :</td><td><b>" + student['email'] + "</b></td></tr>";
+                    $("#modal-form table").html(form);
+                    $("#modal").show();
+                }
+            });
+        });
 
-                            od            orm     ble")        l(for    ;
-                  $("#    dal").show();
-    }              });
-         );
+        $("#close-btn").on("click", function () {
+            $("#modal").hide();
+        });
 
-    //Hid    modal box
-    #close - on("click", function () {
-        $(" #moda                de();
-                     //delet                           cript
-             ".delete                ").on("clic            nct                
-              var s_id                          s).data("s                                   .a                               url:       tudent.php",
-            t                ST",
-            da ta: {
-            sid: s_id
-                                               s: ctio(data         $(".message").html(data);
-            setTimeout(function() {
-                window.location.reload();
-            }, 2000);
+        $(".delete-student").on("click", function (e) {
+            e.preventDefault();
+            var student_id = $(this).closest("form").data("sid");
+            if (confirm("Are you sure you want to delete this student?")) {
+                $.ajax({
+                    url: window.location.origin + "/student/delete/" + student_id,
+                    type: "delete",
+                    success: function (data) {
+                        $(".message").html(data);
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                });
             }
         });
     });

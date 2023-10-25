@@ -9,7 +9,7 @@
     </div>
     <div class="row">
       <div class="offset-md-3 col-md-6">
-        <form class="yourform" action="{{ route('student.update', $student->id) }}" method="post" autocomplete="off">
+        <form class="yourform" action="{{ route('student.update', $student->id) }}" method="post" autocomplete="off" enctype="multipart/form-data">
           @csrf
           <div class="form-group">
             <label>Estudiante</label>
@@ -32,10 +32,10 @@
           <div class="form-group">
             <label>Género</label>
             <select name="gender" class="form-control">
-              @if ($student->gneder == 'male')
-              <option value="male" selected>Hombre</option>
+              @if ($student->gender == 'Hombre')
+              <option value="Hombre" selected>Hombre</option>
               @else
-              <option value="female" selected>Mujer</option>
+              <option value="Mujer" selected>Mujer</option>
               @endif
             </select>
             @error('gender')
@@ -75,6 +75,15 @@
             <label>Email</label>
             <input type="email" class="form-control" placeholder="Email" name="email" value="{{ $student->email }}" required>
             @error('email')
+            <div class="alert alert-danger" role="alert">
+              {{ $message }}
+            </div>
+            @enderror
+          </div>
+          <div class="form-group">
+            <label>Foto</label>
+            <input type="file" class="form-control" name="photo" value="{{ $student->photo }}">
+            @error('photo')
             <div class="alert alert-danger" role="alert">
               {{ $message }}
             </div>

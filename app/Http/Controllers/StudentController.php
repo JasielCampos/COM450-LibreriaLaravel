@@ -39,12 +39,12 @@ class StudentController extends Controller
      * @param  \App\Http\Requests\StorestudentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorestudentRequest $request)
-    {
-        student::create($request->validated());
+    // public function store(StorestudentRequest $request)
+    // {
+    //     student::create($request->validated());
 
-        return redirect()->route('students');
-    }
+    //     return redirect()->route('students');
+    // }
 
     /**
      * Display the specified resource.
@@ -77,20 +77,20 @@ class StudentController extends Controller
      * @param  \App\Http\Requests\UpdatestudentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatestudentRequest $request, $id)
-    {
-        $student = student::find($id);
-        $student->name = $request->name;
-        $student->address = $request->address;
-        $student->gender = $request->gender;
-        $student->class = $request->class;
-        $student->age = $request->age;
-        $student->phone = $request->phone;
-        $student->email = $request->email;
-        $student->save();
+    // public function update(UpdatestudentRequest $request, $id)
+    // {
+    //     $student = student::find($id);
+    //     $student->name = $request->name;
+    //     $student->address = $request->address;
+    //     $student->gender = $request->gender;
+    //     $student->class = $request->class;
+    //     $student->age = $request->age;
+    //     $student->phone = $request->phone;
+    //     $student->email = $request->email;
+    //     $student->save();
 
-        return redirect()->route('students');
-    }
+    //     return redirect()->route('students');
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -102,6 +102,16 @@ class StudentController extends Controller
     {
         student::find($id)->delete();
         return redirect()->route('students');
+    }
+
+    public function carnetVencimiento()
+    {
+        //$return_date = date('Y-m-d H:i:s', strtotime("+" . (settings::latest()->first()->return_days) . " days"));
+        $expires_at = date('Y-m-d H:i:s', strtotime("+6 months"));
+        $students = student::where('expires_at', '<', $expires_at)->get();
+        return view('student.carnetVencimiento', [
+            'students' => $students
+        ]);
     }
 
 
@@ -145,4 +155,42 @@ class StudentController extends Controller
         // Stream the PDF to the browser with option 'Attachment' set to false
         return $dompdf->stream("carnet_estudiante_$student->name.pdf", ['Attachment' => false]);
     }
+
+    public function store(StorestudentRequest $request)
+    {
+        $data = $request->validated();
+
+        // Handle photo upload
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $fileName);
+            $data['photo'] = $fileName; // This should save the filename to the database
+        }
+
+        // The create method should save the student with the photo filename
+        Student::create($data);
+
+        return redirect()->route('students');
+    }
+
+
+    public function update(UpdatestudentRequest $request, $id)
+    {
+        $data = $request->validated();
+        $student = Student::find($id);
+
+        // Handle photo upload
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads'), $fileName);
+            $data['photo'] = $fileName;
+        }
+
+        $student->update($data);
+
+        return redirect()->route('students');
+    }
+
 }
