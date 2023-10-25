@@ -33,12 +33,8 @@
               <td><b>{{ $book->issue_date->format('d M, Y H:i') }}</b></td>
             </tr>
             <tr>
-              <td>Fecha de Devolucion:</td>
+              <td>Fecha de Devolucion : </td>
               <td><b>{{ $book->return_date->format('d M, Y') }}</b></td>
-            </tr>
-            <tr>
-              <td>Multa:</td>
-              <td>Bs. {{ $fine }}</td>
             </tr>
             @if ($book->issue_status == 'Y')
             <tr>
@@ -52,21 +48,17 @@
             @else
             @if (date('Y-m-d') > $book->return_date->format('d-m-Y'))
             <tr>
-              <td>Multa</td>
-              <td>Bs. {{ $fine }}</td>
+              <td>Bien</td>
+              <td>Rs. {{ $fine }}</td>
             </tr>
             @endif
             @endif
           </table>
           @if ($book->issue_status == 'N')
-          <div>
-            <form action="{{ route('book_issue.update', $book->id) }}" method="post" autocomplete="off">
-              @csrf
-              <input type='submit' class='btn btn-danger' name='save' value='Regresar Libro'>
-            </form>
-            <br>
-              <a href="{{  route('pdf_ficha', [$book->id]) }}" target="_red" class="btn btn-danger">Generar ficha</a> 
-          </div>
+          <form action="{{ route('book_issue.update', $book->id) }}" method="post" autocomplete="off">
+            @csrf
+            <input type='submit' class='btn btn-danger' name='save' value='Regresar Libro'>
+          </form>
           @endif
         </div>
       </div>

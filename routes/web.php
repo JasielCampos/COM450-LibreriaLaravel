@@ -68,8 +68,8 @@ Route::middleware('auth')->group(function () {
     // books CRUD
     Route::get('/books', [BookController::class, 'index'])->name('books');
     Route::get('/book/create', [BookController::class, 'create'])->name('book.create');
-    Route::post('/book/update/{id}', [BookController::class, 'update'])->name('book.update');
     Route::get('/book/edit/{book}', [BookController::class, 'edit'])->name('book.edit');
+    Route::post('/book/update/{id}', [BookController::class, 'update'])->name('book.update');
     Route::post('/book/delete/{id}', [BookController::class, 'destroy'])->name('book.destroy');
     Route::post('/book/create', [BookController::class, 'store'])->name('book.store');
 
@@ -91,7 +91,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/book_issue', [BookIssueController::class, 'index'])->name('book_issued');
     Route::get('/book-issue/create', [BookIssueController::class, 'create'])->name('book_issue.create');
     Route::get('/book-issue/edit/{id}', [BookIssueController::class, 'edit'])->name('book_issue.edit');
-    
     Route::post('/book-issue/update/{id}', [BookIssueController::class, 'update'])->name('book_issue.update');
     Route::post('/book-issue/delete/{id}', [BookIssueController::class, 'destroy'])->name('book_issue.destroy');
     Route::post('/book-issue/create', [BookIssueController::class, 'store'])->name('book_issue.store');
@@ -109,8 +108,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('/book_issue/generate-pdf', [BookIssueController::class, 'generate_pdf'])->name('book_issued.generate_pdf');
     // Route::get('/generate-pdf', [BookIssueController::class, 'generate_PDF'])->name('generate_pdf');
     //Route::get('/reports/pdf_date', 'PDFController@pdf_date')->name('pdf_date');
-    Route::get('/reports/pdf', [PDFController::class, 'pdf'])->name('pdf');
+    Route::get('/reports/pdf_date', [PDFController::class, 'pdf_date'])->name('pdf_date');
     Route::get('/reports/pdf_month', [PDFController::class, 'pdf_month'])->name('pdf_month');
     Route::get('/reports/pdf_not', [PDFController::class, 'pdf_not'])->name('pdf_not');
-    Route::get('/book-issue/pdf_ficha/{id}', [BookIssueController::class, 'pdf_ficha'])->name('pdf_ficha');
 });

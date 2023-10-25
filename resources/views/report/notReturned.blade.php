@@ -8,21 +8,19 @@
       </div>
     </div>
     @if ($books)
-    <div class="text-right">
-    <a href="{{ route('pdf_not') }}" target="_red" class="btn btn-danger px-3 py-2">Generar PDF</a> 
-    </div>
-    <div class="row p-3">
+    <a href="{{ route('pdf_not') }}" target="_red" class="btn btn-danger">Generar PDF</a> 
+    <div class="row">
       <div class="col-md-12">
         <table class="content-table">
           <thead>
-            <th>Nro.</th>
-            <th>Lector</th>
-            <th>Título del Libro</th>
+            <th>S.No</th>
+            <th>Estudiante</th>
+            <th>Titulo del Libro</th>
             <th>Celular</th>
             <th>Email</th>
-            <th>Fecha de Préstamo</th>
-            <th>Fecha de Devolución</th>
-            <th>Días de Retraso</th>
+            <th>Fecha de Prestamo</th>
+            <th>Fecha de Devolucion</th>
+            <th>Dias de Retraso</th>
           </thead>
           <tbody>
             @forelse ($books as $book)

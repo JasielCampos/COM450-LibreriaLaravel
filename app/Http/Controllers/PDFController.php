@@ -9,7 +9,7 @@ use App\Models\book;
 
 class PDFController extends Controller
 {
-  function pdf(Request $request)
+  function pdf_date(Request $request)
   {
     $request->validate(['date' => "required|date"]);
     $pdf = Pdf::loadView('report.dateWise', ['books' => book_issue::where('issue_date', 'LIKE', '%' . $request->date)->latest()->get()]);
@@ -55,7 +55,7 @@ class PDFController extends Controller
   {
     //$books = ['books' => book_issue::where('issue_status', 'LIKE', '%'. 'N' .'%')->latest()->get()];
     $pdf = Pdf::loadView('report.pdf_not', ['books' => book_issue::where('issue_status', 'LIKE', '%' . 'N' . '%')->latest()->get()]);
-    return $pdf->setPaper('a4' . 'landscape')->stream('ReporteNoEntregados');
+    return $pdf->setPaper('a4' . 'landscape')->stream();
 
     //return view('report.pdf_not',[
     //    'books' => book_issue::latest()->get()
@@ -67,4 +67,3 @@ class PDFController extends Controller
 
   }
 }
-

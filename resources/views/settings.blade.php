@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-                    <h2 class="admin-heading">Ajustes</h2>
+                    <h2 class="admin-heading">Settings</h2>
                 </div>
             </div>
             <div class="row">
@@ -12,7 +12,7 @@
                     <form class="yourform" action="{{ route('settings') }}" method="post" autocomplete="off">
                         @csrf
                         <div class="form-group">
-                            <label>Días de Préstamo</label>
+                            <label>Return Days</label>
                             <input type="number" class="form-control" name="return_days" value="{{ $data->return_days }}"
                                 required>
                             @error('return_days')
@@ -22,7 +22,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label>Multa (Bs.)</label>
+                            <label>Fine (in Rs.)</label>
                             <input type="number" class="form-control" name="fine" value="{{ $data->fine }}" required>
                             @error('fine')
                                 <div class="alert alert-danger" role="alert">
@@ -30,7 +30,7 @@
                                 </div>
                             @enderror
                         </div>
-                        <input type="submit" class="btn btn-danger" value="Actualizar" required>
+                        <input type="submit" class="btn btn-danger" value="Update" required>
                     </form>
                 </div>
             </div>

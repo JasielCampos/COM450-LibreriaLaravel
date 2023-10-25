@@ -84,24 +84,6 @@ class BookIssueController extends Controller
     ]);
   }
 
-  function pdf_ficha($id)
-  {
-    
-    $books = book_issue::where('id', $id)->get()->first();
-    $first_date = date_create(date('Y-m-d H:i:s'));
-    $last_date = date_create($books->return_date);
-    $diff = date_diff($first_date, $last_date);
-    $fine = (settings::latest()->first()->fine * $diff->format('%a'));
-
-    // Genera el PDF
-    $pdf = PDF::loadView('book.pdf_ficha', ['books' => $books]);
-
-    // Retorna el PDF para que se muestre en el navegador
-    return $pdf->setPaper('a4')->stream('fichalibro_.pdf');
-
-    }
-
-
   /**
    * Update the specified resource in storage.
    *

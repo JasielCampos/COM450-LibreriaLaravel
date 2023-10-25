@@ -36,7 +36,6 @@ class book_issue extends Model
         'issue_date' => 'datetime:Y-m-d H:i:s',
         'return_date' => 'datetime:Y-m-d H:i:s',
         'return_day' => 'datetime:Y-m-d H:i:s',
-        
     ];
 
 }
